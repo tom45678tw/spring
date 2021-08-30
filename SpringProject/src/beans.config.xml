@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+   
+    
+		
+	 <context:annotation-config/>
+	<context:component-scan base-package="tw.da"/>
+	
+	<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	   <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+	   <property name="url" value="jdbc:sqlserver://localhost:1433;databaseName=DA"/>
+	   <property name="username" value="sa"/>
+	   <property name="password" value="as"/>
+	</bean>
+	
+	<!-- @PropertySource("classpath:tree.properties") 即可不用讚註冊 -->
+	<bean id="props" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+	<property name="location">
+	<value>classpath:tree.properties</value>
+	</property>
+	</bean>
+	
+	<bean id="room1" class="tw.da.model.Room">
+	<property name="id" value="10001"/>
+	<property name="name" value="elsa"/>
+	<property name="size" value="Large"/>
+	</bean>
+	
+	<bean id="room2" class="tw.da.model.Room">
+	<property name="id" value="10002"/>
+	<property name="name" value="elsa room"/>
+	<property name="size" value="Large room"/>
+	</bean>
+	
+    <!-- logprovider  logProvider= new logprovider -->
+	<bean id="logProvider" class="tw.da.util.logprovider"/>
+	<!-- String string0=new String("This is a beautiful place") -->
+	<bean id="string0" name="string1,string2" class="java.lang.String">
+	<constructor-arg value="This is a beautiful place"/>
+	</bean>
+	<!--LoginDAO  LoginDAO= new LoginDAO();  -->
+	<bean id="LoginDAO" class="tw.da.model.LoginDAO"/>
+	<!--LoginService LoginService1 =new LoginService(LoginDAO) -->
+	<bean id="LoginService1" class="tw.da.model.LoginService">
+	<constructor-arg ref="LoginDAO"/>
+	</bean>
+	<!-- LoginService loginService2 = new LoginService() 
+	   loginService2.setLoginDAO(LoginDAO)
+	-->
+	<bean id="LoginService2" class="tw.da.model.LoginService">
+    <property name="logindao" ref="LoginDAO"></property>
+	</bean>
+	
+		<bean id="human1" class="tw.da.model.Human">
+	   <constructor-arg index="0" value="mary"/>
+	   <constructor-arg index="1" value="18"/>
+	</bean>
+	<bean id="human2" class="tw.da.model.Human">
+	   <property name="name" value="judy"/>
+	   <property name="age" value="25"/>
+	</bean>
+	
+	 <bean id="human3" class="tw.da.model.Human" p:name="julia" p:age="21"></bean>
+	 
+	 <bean id="fordTruck" class="tw.da.model.TruckBeanStaticFactory" factory-method="getTruckBean">
+	 <constructor-arg value="1"/>
+	 </bean>
+	 
+	 <bean id="nissanTruck" class="tw.da.model.TruckBeanStaticFactory" factory-method="getTruckBean">
+	      <constructor-arg value="2"/>
+	 </bean>
+	 
+	 <bean id="truckBeanFactory" class="tw.da.model.TruckBeanFactory">
+	 <property name="map">
+	 <map>
+	 <entry key="1">
+	 <bean class="tw.da.model.TruchBean">
+	 <property name="id" value="5"></property>
+	 <property name="breand" value="subaru"></property>
+	 </bean> 
+	 </entry>
+	 
+	 <entry key="2">
+	 <bean class="tw.da.model.TruchBean">
+	 <property name="id" value="6"></property>
+	 <property name="breand" value="ferrari"></property>
+	 </bean> 
+	 </entry>
+	 </map>
+	 
+	 </property>
+	 </bean>
+	 
+	 <bean id="subaruTruck" factory-bean="truckBeanFactory" factory-method="getTruckBean">
+	 <constructor-arg value="1"/>
+	 </bean>
+	 
+	 	 <bean id="ferrariTruck" factory-bean="truckBeanFactory" factory-method="getTruckBean">
+	 <constructor-arg value="2"/>
+	 </bean>
+	 
+	 
+	 
+</beans>
