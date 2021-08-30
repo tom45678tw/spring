@@ -12,7 +12,7 @@ import tw.da.model.workDao;
 public class SpringJavaConfig {
 	
 	   @Bean  //<bean id="worker" class="tw.leonchen.model.Worker"/>
-		public tw.da.model.worker worker() {
+		public tw.da.model.worker Worker() {
 			tw.da.model.worker worker = new tw.da.model.worker();
 			worker.setWorkerId(001);
 			worker.setWorkerName("tom");
@@ -20,7 +20,7 @@ public class SpringJavaConfig {
 		}
 	   @Bean(value="wDao1") //呼叫只能用wDao1 就不能用workDao了
 	   public workDao workerDao() {
-		   workDao wDao = new workDao(worker());
+		   workDao wDao = new workDao(Worker());
 		   return wDao;
 	   }
 	}

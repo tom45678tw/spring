@@ -6,16 +6,16 @@ import org.springframework.stereotype.Repository;
                
 @Repository(value="roomDao") //Setter DI <bean id=roomDao class="tw.da.RoomDao">
 public class RoomDao {
-     @Autowired    //@第一招
+//     @Autowired  @Qualifier("room1")  //@第一招
 	 private Room room;
 	 
-//     public RoomDao() {           //以下兩個 RoomDao() 是第二招 Cunstructor DI
-//    	 
-//     }
-//     
-//     public RoomDao(@Qualifier("room") Room room) {
-//    	 this.room=room;
-//     }
+     public RoomDao() {           //以下兩個 RoomDao() 是第二招 Cunstructor DI
+    	 
+     }
+     @Autowired
+     public RoomDao(@Qualifier("room2") Room room) {
+    	 this.room=room;
+     }
 	 public void showDatails() {
 		 System.out.println(room.getId()+":"+room.getName()+":"+room.getSize());
 	 }

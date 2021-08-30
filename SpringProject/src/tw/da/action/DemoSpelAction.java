@@ -23,14 +23,14 @@ public class DemoSpelAction {
 			String result = express.getValue().toString();
 			System.out.println("result:" + result);
 			
-			StandardEvaluationContext ectx = new StandardEvaluationContext();
 	           TruchBean t1 = new TruchBean(101,"bmw");
 	           TruchBean t2 = new TruchBean(101,"benz");
-	           
+	            
 	           ArrayList<TruchBean> trucks = new ArrayList<TruchBean>();
 	                 trucks.add(t1);
 	                 trucks.add(t2);
 	                 
+	           StandardEvaluationContext ectx = new StandardEvaluationContext();
 	                 ectx.setVariable("trucks", trucks);
 	                 
 	                 String brand = parser.parseExpression("#trucks[1].breand").getValue(ectx,String.class);

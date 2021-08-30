@@ -10,6 +10,7 @@ public class DemoHumanAction {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.config.xml");
 		
 		  Human human = context.getBean("human1", Human.class);
+		  human.setAge(100);
 		System.out.println(human.getName() + ":" + human.getAge()); 
 		
 		 Human human2 = context.getBean("human2", Human.class);

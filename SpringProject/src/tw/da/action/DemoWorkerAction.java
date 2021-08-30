@@ -11,7 +11,7 @@ public class DemoWorkerAction {
 	public static void main(String[] args) {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringJavaConfig.class);
-	     worker worker = context.getBean("worker",worker.class);
+	     worker worker = context.getBean("Worker",worker.class);
 	     System.out.println(worker.getWorkerId()+":"+worker.getWorkerName());
 		
 	      workDao wDao1 = context.getBean("wDao1",workDao.class);

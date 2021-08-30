@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public class HouseDao {
     @Autowired
 	private DataSource dataSource=null;
-    
+      
     public House select(int houseId) throws SQLException {
     	Connection conn = dataSource.getConnection();
     	String sql="select * from House where houseid=?";

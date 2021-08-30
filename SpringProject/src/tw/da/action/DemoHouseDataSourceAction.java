@@ -14,7 +14,7 @@ public class DemoHouseDataSourceAction {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.config.xml");
 	   
 		  HouseService h = context.getBean("houseService",HouseService.class);
-		  House hB = h.select(1001);
+		  House hB = h.select(1003);
 		  System.out.println(hB.getHouseid()+":"+hB.getHousename());
 		context.close();
 	
