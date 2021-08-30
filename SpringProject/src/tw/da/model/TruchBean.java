@@ -3,6 +3,7 @@ package tw.da.model;
 public class TruchBean {
  private int id;
  private String breand;
+ 
 	public TruchBean() {
 	}
 	public TruchBean(int id,String breand) {

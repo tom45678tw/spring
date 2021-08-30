@@ -9,7 +9,7 @@
    
     
 		
-	 <context:annotation-config/>
+	 <context:annotation-config/> 
 	<context:component-scan base-package="tw.da"/>
 	
 	<bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -44,27 +44,51 @@
 	<bean id="string0" name="string1,string2" class="java.lang.String">
 	<constructor-arg value="This is a beautiful place"/>
 	</bean>
+	
 	<!--LoginDAO  LoginDAO= new LoginDAO();  -->
 	<bean id="LoginDAO" class="tw.da.model.LoginDAO"/>
+	
 	<!--LoginService LoginService1 =new LoginService(LoginDAO) -->
 	<bean id="LoginService1" class="tw.da.model.LoginService">
+	<constructor-arg ref="LoginDAO"/>
+	</bean>
+	
+	<bean id="c1" class="tw.da.model.c1">
 	<constructor-arg ref="LoginDAO"/>
 	</bean>
 	<!-- LoginService loginService2 = new LoginService() 
 	   loginService2.setLoginDAO(LoginDAO)
 	-->
+	
 	<bean id="LoginService2" class="tw.da.model.LoginService">
-    <property name="logindao" ref="LoginDAO"></property>
+    <property name="logindao" ref="LoginDAO"/>
 	</bean>
 	
+	
+	<bean id="hu" class="tw.da.model.Human">
+	<constructor-arg index="0" value="tom" />
+	<constructor-arg index="1" value="18"/>
+	</bean>
+	
+	
+	
+	
+		<!-- Constructor DI -->
+	<!-- Human human1 = new Human("mary", 18); -->
 		<bean id="human1" class="tw.da.model.Human">
 	   <constructor-arg index="0" value="mary"/>
 	   <constructor-arg index="1" value="18"/>
+	   
 	</bean>
+	<!-- Setter DI -->
+	<!-- Human human2 = new Human(); human2.setName("judy"); human2.setAge("25"); -->
 	<bean id="human2" class="tw.da.model.Human">
 	   <property name="name" value="judy"/>
 	   <property name="age" value="25"/>
 	</bean>
+	
+	<bean id="s1" class="tw.da.model.Human" p:name="henry" p:age="35"></bean>
+	
 	
 	 <bean id="human3" class="tw.da.model.Human" p:name="julia" p:age="21"></bean>
 	 
@@ -75,6 +99,27 @@
 	 <bean id="nissanTruck" class="tw.da.model.TruckBeanStaticFactory" factory-method="getTruckBean">
 	      <constructor-arg value="2"/>
 	 </bean>
+	 
+	 
+	 <bean id="qq1" class="tw.da.model.TruckBeanFactory" >
+	 <property name="map">
+	 <map>
+	 <entry key="3">
+	 <bean  class="tw.da.model.TruchBean" p:id="5" p:breand="tom"/>
+	 </entry>
+	 </map>
+	 </property>
+	 </bean>
+	 
+	 <bean id="ss1" factory-bean="qq1" factory-method="getTruckBean">
+	 <constructor-arg value="3"></constructor-arg>
+	 </bean>
+	 
+	 
+	 
+	 
+	 
+	 
 	 
 	 <bean id="truckBeanFactory" class="tw.da.model.TruckBeanFactory">
 	 <property name="map">
@@ -92,6 +137,11 @@
 	 <property name="breand" value="ferrari"></property>
 	 </bean> 
 	 </entry>
+	 
+	 
+	 
+	 
+	 
 	 </map>
 	 
 	 </property>

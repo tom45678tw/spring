@@ -11,7 +11,7 @@ public class TruckBeanFactory {
 		public void setMap(Map<Integer, TruchBean> map) {
 			this.map = map;
 		} 
-	    
+	     
 		public TruchBean getTruckBean(int id) {
 			return map.get(id);
 		}
